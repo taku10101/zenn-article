@@ -1,8 +1,7 @@
 ---
 title: "
 【ReactHookForm✖️zod】
-
-FormProviderで簡単すっきりフォーム実装
+FormProviderで簡単フォーム実装
 "
 emoji: "💭"
 type: "tech"
