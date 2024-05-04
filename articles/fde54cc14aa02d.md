@@ -117,6 +117,6 @@ function InputField(props: Props) {
 }
 ```
 
-### サンプルリポジトリ
+## サンプルリポジトリ
 
 https://github.com/taku10101/reacthookform-example
