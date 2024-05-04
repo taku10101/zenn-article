@@ -6,12 +6,11 @@ FormProviderで簡単すっきりフォーム実装
 emoji: "💭"
 type: "tech"
 topics: [React, TypeScript, Javascript]
-published: true
+published: false
 ---
 
 ## はじめに
 
-今回
 ReactHookForm の FormProvider と zod を用いてバリデーションやエラーメッセージの管理など実装していきます。
 
 ## 使用するライブラリ
