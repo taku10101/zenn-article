@@ -19,6 +19,9 @@ https://www.npmjs.com/package/@hookform/resolvers
 
 ## FormProvider の実装
 
+FormProvider を使うことで複数のフォームの状態やメソッドを管理しやすくなります。
+zodResolver で後述する zodSchema の適応を行い、バリデーションやエラーメッセージの設定を可能にします。
+
 ```tsx
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -63,6 +66,10 @@ const sampleFormSchema = z.object({
 React Hook Form の useFormContext を使用すると、メソッドを呼び出したりフォーム全体で状態を共有できるようになります。
 今回は register メソッドを使って props で受け取った key で form に値を渡していきます。
 
+formState を利用して先程設定した message を取り出して error として表示させます。
+
+### Select
+
 ```tsx
 import { useFormContext } from "react-hook-form";
 
@@ -72,16 +79,24 @@ type Props = {
 function SelectField(props: Props) {
   const methods = useFormContext();
   return (
-    <select {...methods.register(props.name)}>
-      {["", "one", "two", "three"].map((value) => (
-        <option key={value} value={value}>
-          {value}
-        </option>
-      ))}
-    </select>
+    <>
+      <select {...methods.register(props.name)}>
+        {["", "one", "two", "three"].map((value) => (
+          <option key={value} value={value}>
+            {value}
+          </option>
+        ))}
+      </select>
+
+      {methods.formState.errors[props.name] && (
+        <p>{methods.formState.errors[props.name]?.message as string}</p>
+      )}
+    </>
   );
 }
 ```
+
+### Input
 
 ```tsx
 import { useFormContext } from "react-hook-form";
@@ -91,6 +106,13 @@ type Props = {
 };
 function InputField(props: Props) {
   const methods = useFormContext();
-  return <input {...methods.register(props.name)} />;
+  return (
+    <div>
+      <input {...methods.register(props.name)} />
+      {methods.formState.errors[props.name] && (
+        <p>{methods.formState.errors[props.name]?.message as string}</p>
+      )}
+    </div>
+  );
 }
 ```
